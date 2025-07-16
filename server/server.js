@@ -5,8 +5,14 @@ import { openai } from "./configs/openai.js";
 
 const app = express();
 
-app.use(cors());
+//Allow multiple origins
+const allowedOrigin = [
+  "http://localhost:3000",
+  "https://smarttalk-ai-weld.vercel.app/",
+];
+
 app.use(express.json());
+app.use(cors({ origin: allowedOrigin, credentials: true }));
 
 app.get("/", async (req, res) => {
   res.status(200).json({
