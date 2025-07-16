@@ -8,7 +8,7 @@ const app = express();
 //Allow multiple origins
 const allowedOrigin = [
   "http://localhost:3000",
-  "https://smarttalk-ai-weld.vercel.app/",
+  "https://smarttalk-ai-weld.vercel.app",
 ];
 
 app.use(express.json());
