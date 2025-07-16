@@ -16,7 +16,6 @@ app.get("/", async (req, res) => {
 
 app.post("/api/chat", async (req, res) => {
   const { prompt } = req.body;
-  console.log(req.body);
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4.1",
