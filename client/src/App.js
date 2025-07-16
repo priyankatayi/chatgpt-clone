@@ -1,12 +1,12 @@
 import "./App.css";
-import logo from "./assets/chatgpt.svg";
+import logo from "./assets/smartTalk.svg";
 import addBtn from "./assets/add-30.png";
 import home from "./assets/home.svg";
 import msgIcon from "./assets/message.svg";
 import bookmark from "./assets/bookmark.svg";
 import upgrade from "./assets/rocket.svg";
 import sendBtn from "./assets/send.svg";
-import chatgptLogo from "./assets/chatgptLogo.svg";
+import smartTalkLogo from "./assets/smartTalkLogo.svg";
 import userIcon from "./assets/user-icon.png";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
@@ -94,7 +94,7 @@ function App() {
         <div className="upperSide">
           <div className="upperSideTop">
             <img className="logo" src={logo} alt="logo" />
-            <span className="brand">ChatGPT</span>
+            <span className="brand">SmartTalk AI</span>
           </div>
           <button className="midBtn" onClick={() => window.location.reload()}>
             <img src={addBtn} alt="new chat" className="addBtn" />
@@ -145,7 +145,7 @@ function App() {
                 >
                   <img
                     className="chatImg"
-                    src={message.role === "system" ? chatgptLogo : userIcon}
+                    src={message.role === "system" ? smartTalkLogo : userIcon}
                     alt=""
                   />
                   <div className="text">
@@ -175,8 +175,8 @@ function App() {
             </button>
           </div>
           <p>
-            ChatGPT may produce inaccurate information about people, places or
-            facts. ChatGPT July 20 version.
+            SmartTalk AI may produce inaccurate information about people, places
+            or facts.
           </p>
         </div>
       </div>

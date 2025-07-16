@@ -1,4 +1,4 @@
-# 💬 ChatGPT Clone (Full Stack)
+# 💬 SmartTalk AI (Full Stack)
 
 A full-stack ChatGPT-style AI chatbot with a **React frontend** and **Node.js/Express backend**, powered by the **OpenAI API**. This app mimics ChatGPT's behavior with streaming responses and a real-time UI.
 
