@@ -36,9 +36,12 @@ function App() {
     setMessages([...messages, prompt, { role: "system", content: "" }]);
 
     try {
-      const response = await axios.post("http://localhost:5000/api/chat", {
-        prompt: [prompt],
-      });
+      const response = await axios.post(
+        "https://smarttalk-ai.vercel.app/api/chat",
+        {
+          prompt: [prompt],
+        }
+      );
       const systemText = response.data.message;
       clearInterval(loaderInterval);
       setLoader("");
