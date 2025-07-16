@@ -28,8 +28,8 @@ A full-stack ChatGPT-style AI chatbot with a **React frontend** and **Node.js/Ex
 ### 1. Clone the Repo
 
 ```bash
-git clone https://github.com/priyankatayi/chatgpt-clone.git
-cd chatgpt-clone
+git clone https://github.com/priyankatayi/smarttalk-ai.git
+cd smarttalk-ai
 ```
 
 ### 2. Install Dependencies
@@ -81,7 +81,7 @@ Visit: `http://localhost:3000`
 ## 📁 Folder Structure
 
 ```
-chatgpt-clone/
+smarttalk-ai/
 │
 ├── client/               # React frontend
 │   ├── src/
