@@ -6,13 +6,13 @@ A full-stack ChatGPT-style AI chatbot with a **React frontend** and **Node.js/Ex
 
 ## 🚀 Features
 
-- Displays animated typing indicators while awaiting AI responses, creating a more human-like interaction.
+- Displays animated typing indicators for a more natural, real-time chat experience.
 
-- Uses a Node.js/Express backend proxy to safely communicate with OpenAI's GPT API without exposing API keys on the client.
+- Communicates securely with OpenAI's API via a Node.js proxy, hiding API keys from the client.
 
-- Supports formatted responses using ReactMarkdown, including headings, links, code blocks, and lists.
+- Renders formatted responses using ReactMarkdown with support for code, links, and lists.
 
-- Chat history is automatically persisted and restored across sessions using a custom useLocalStorage React hook.
+- Persists and restores chat history using a custom useLocalStorage React hook.
 
 ---
 
