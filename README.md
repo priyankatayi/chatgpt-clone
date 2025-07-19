@@ -110,7 +110,6 @@ smarttalk-ai/
 ## 📌 TODO / Future Enhancements
 
 - Add user login (JWT)
-- Store chat history in local storage or a database
 - Add dark/light theme toggle
 - Make it responsive
 - Support for image generation (DALL·E)
