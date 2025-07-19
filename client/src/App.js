@@ -11,16 +11,18 @@ import userIcon from "./assets/user-icon.png";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import { useState, useRef, useEffect } from "react";
+import useLocalStorage from "./useLocalStorage";
 
 function App() {
   const [input, setInput] = useState("");
   const endOfMessages = useRef();
-  const [messages, setMessages] = useState([
+  const [messages, setMessages] = useLocalStorage("chatHistory", [
     {
       role: "system",
       content: "how can I help?",
     },
   ]);
+  const [isLoading, setIsLoading] = useState(false);
   const [loader, setLoader] = useState("");
 
   useEffect(() => {
@@ -28,12 +30,13 @@ function App() {
   }, [messages]);
 
   const onClickHandler = async (e) => {
-    const loaderInterval = startLoader();
     if (!input.trim()) return;
+    setIsLoading(true);
+    const loaderInterval = startLoader();
     const text = input;
     setInput("");
     const prompt = { role: "user", content: text };
-    setMessages([...messages, prompt, { role: "system", content: "" }]);
+    setMessages((prev) => [...prev, prompt, { role: "system", content: "" }]);
 
     try {
       const response = await axios.post(
@@ -45,28 +48,23 @@ function App() {
       const systemText = response.data.message;
       clearInterval(loaderInterval);
       setLoader("");
-      systemText.split("").forEach((char, index) => {
-        setTimeout(() => {
-          setMessages((prev) => {
-            const updated = [...prev];
-            const last = updated[updated.length - 1];
-            updated[updated.length - 1] = {
-              ...last,
-              content: last.content + char,
-            };
-            return updated;
-          });
-        }, index * 30);
+      setMessages((prev) => {
+        const updated = [...prev];
+        updated[updated.length - 1] = { role: "system", content: systemText };
+        return updated;
       });
+      setIsLoading(false);
     } catch (error) {
+      setIsLoading(false);
       setMessages((prev) => {
         const updated = [...prev];
         updated[updated.length - 1] = {
-          ...prev,
+          role: "system",
           content: "Something went wrong.",
         };
         return updated;
       });
+      console.log(error.message);
     }
   };
 
@@ -141,25 +139,23 @@ function App() {
         <div className="chats">
           {messages.map((message, i) => {
             return (
-              <>
-                <div
-                  key={i}
-                  className={message.role === "system" ? "chat bot" : "chat"}
-                >
-                  <img
-                    className="chatImg"
-                    src={message.role === "system" ? smartTalkLogo : userIcon}
-                    alt=""
-                  />
-                  <div className="text">
-                    {message.content !== "" ? (
-                      <ReactMarkdown>{message.content}</ReactMarkdown>
-                    ) : (
-                      <p>{loader}</p>
-                    )}
-                  </div>
+              <div
+                key={i}
+                className={message.role === "system" ? "chat bot" : "chat"}
+              >
+                <img
+                  className="chatImg"
+                  src={message.role === "system" ? smartTalkLogo : userIcon}
+                  alt=""
+                />
+                <div className="text">
+                  {message.content !== "" ? (
+                    <ReactMarkdown>{message.content}</ReactMarkdown>
+                  ) : (
+                    <p>{loader}</p>
+                  )}
                 </div>
-              </>
+              </div>
             );
           })}
           <div ref={endOfMessages} />
@@ -172,8 +168,14 @@ function App() {
               value={input}
               onChange={(e) => setInput(e.target.value)}
               onKeyDown={handleEnter}
+              disabled={isLoading}
             />
-            <button type="submit" onClick={onClickHandler} className="send">
+            <button
+              type="submit"
+              onClick={onClickHandler}
+              className="send"
+              disabled={isLoading}
+            >
               <img src={sendBtn} alt="send" />
             </button>
           </div>
